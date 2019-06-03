@@ -76,4 +76,3 @@ config :kekbot, Kekbot.Repo,
   url: System.get_env("DATABASE_URL"),
   pool_size: 10,
   ssl: true
-import_config "prod.secret.exs"
