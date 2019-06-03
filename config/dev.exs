@@ -54,3 +54,7 @@ config :kekbot, Kekbot.Repo,
   database: "kekbot_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :kekbot,
+  bot_token: "891229235:AAE3nIEHvfc13rU4tAUkFDz9brs6vQq060A",
+  bot_name: "test_kekbot"
