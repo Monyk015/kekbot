@@ -9,6 +9,6 @@ defmodule KekbotWeb.Router do
     pipe_through :api
 
     get "/", Controller, :hello
-    get "/updates", Controller, :updates
+    post "/", Controller, :handle
   end
 end

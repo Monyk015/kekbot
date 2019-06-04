@@ -11,7 +11,8 @@ defmodule Kekbot.Application do
       # Start the Ecto repository
       Kekbot.Repo,
       # Start the endpoint when the application starts
-      KekbotWeb.Endpoint
+      KekbotWeb.Endpoint,
+      {Kekbot.CurrentEntity, []}
       # Starts a worker by calling: Kekbot.Worker.start_link(arg)
       # {Kekbot.Worker, arg},
     ]
