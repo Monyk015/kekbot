@@ -12,6 +12,7 @@ use Mix.Config
 config :kekbot, KekbotWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [scheme: "https", host: "kekbot-7133.nodechef.com", port: 443],
+  https: [:inet5, port: 443, cipher_suite: :strong],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 
