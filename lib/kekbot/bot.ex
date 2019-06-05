@@ -3,7 +3,6 @@ defmodule Kekbot.Bot do
   alias Kekbot.Bot.Tag
   alias Kekbot.Repo
   alias Kekbot.CurrentEntity
-  import Ecto.Query
   def api_url, do: "https://api.telegram.org/bot#{Application.fetch_env!(:kekbot, :bot_token)}/"
 
   def req(path, body) do
@@ -25,7 +24,6 @@ defmodule Kekbot.Bot do
     case existing do
       %Entity{} = existing ->
         CurrentEntity.set_current_entity(user_id, existing.id)
-        IO.inspect(CurrentEntity.get_current_entity(user_id))
 
       nil ->
         entity =
@@ -77,6 +75,7 @@ defmodule Kekbot.Bot do
     query = from e in Entity,
       join: t in assoc(e, :tags),
       where: like(t.name, ^like_expr) and e.user_id == ^user_id
+
     entities = Repo.all(query)
 
 
