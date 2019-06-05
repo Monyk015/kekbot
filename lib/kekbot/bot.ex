@@ -3,6 +3,7 @@ defmodule Kekbot.Bot do
   alias Kekbot.Bot.Tag
   alias Kekbot.Repo
   alias Kekbot.CurrentEntity
+  import Ecto.Query
   def api_url, do: "https://api.telegram.org/bot#{Application.fetch_env!(:kekbot, :bot_token)}/"
 
   def req(path, body) do
