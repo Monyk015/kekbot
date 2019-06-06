@@ -11,7 +11,6 @@ use Mix.Config
 # before starting your production server.
 config :kekbot, KekbotWeb.Endpoint,
   load_from_system_env: true,
-  http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [scheme: "https", host: "kekbot-7133.nodechef.com", port: 443],
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
