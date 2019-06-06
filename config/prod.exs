@@ -18,7 +18,7 @@ use Mix.Config
 
 config :kekbot, Kekbot.Endpoint,
   load_from_system_env: true,
-  url: [host: "${APP_NAME}.gigalixirapp.com", port: 80],
+  url: [host: "${APP_NAME}.gigalixirapp.com", port: 80]
 
 config :kekbot, Kekbot.Endpoint,
   server: true,
