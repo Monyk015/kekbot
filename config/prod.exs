@@ -73,3 +73,7 @@ config :kekbot, Kekbot.Repo,
   ssl: true,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+
+config :kekbot,
+  bot_token: System.get_env("BOT_TOKEN"),
+  bot_name: "sgurd_bot"
