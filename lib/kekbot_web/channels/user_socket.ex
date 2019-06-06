@@ -30,4 +30,7 @@ defmodule KekbotWeb.UserSocket do
   #
   # Returning `nil` makes this socket anonymous.
   def id(_socket), do: nil
+
+  transport :websocket, Phoenix.Transports.WebSocket,
+    timeout: 45_000
 end
