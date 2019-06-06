@@ -15,69 +15,29 @@ use Mix.Config
 #   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 
 # Do not print debug messages in production
-config :logger, level: :info
-
-# ## SSL Support
-#
-# To get SSL working, you will need to add the `https` key
-# to the previous section and set your `:url` port to 443:
-#
-#     config :kekbot, KekbotWeb.Endpoint,
-#       ...
-#       url: [host: "example.com", port: 443],
-#       https: [
-#         :inet6,
-#         port: 443,
-#         cipher_suite: :strong,
-#         keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-#         certfile: System.get_env("SOME_APP_SSL_CERT_PATH")
-#       ]
-#
-# The `cipher_suite` is set to `:strong` to support only the
-# latest and more secure SSL ciphers. This means old browsers
-# and clients may not be supported. You can set it to
-# `:compatible` for wider support.
-#
-# `:keyfile` and `:certfile` expect an absolute path to the key
-# and cert in disk or a relative path inside priv, for example
-# "priv/ssl/server.key". For all supported SSL configuration
-# options, see https://hexdocs.pm/plug/Plug.SSL.html#configure/1
-#
-# We also recommend setting `force_ssl` in your endpoint, ensuring
-# no data is ever sent via http, always redirecting to https:
-#
-#     config :kekbot, KekbotWeb.Endpoint,
-#       force_ssl: [hsts: true]
-#
-# Check `Plug.SSL` for all available options in `force_ssl`.
-
-# ## Using releases (distillery)
-#
-# If you are doing OTP releases, you need to instruct Phoenix
-# to start the server for all endpoints:
-#
-#     config :phoenix, :serve_endpoints, true
-#
-# Alternatively, you can configure exactly which server to
-# start per endpoint:
-#
-#     config :kekbot, KekbotWeb.Endpoint, server: true
-#
-# Note you can't rely on `System.get_env/1` when using releases.
-# See the releases documentation accordingly.
-
-# Finally import the config/prod.secret.exs which should be versioned
-# separately.
 
 config :kekbot, Kekbot.Endpoint,
-  http: [port: {:system, "PORT"}], # Possibly not needed, but doesn't hurt
-  url: [host: System.get_env("APP_NAME") <> ".gigalixirapp.com", port: 80],
-  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
-  server: true
+  load_from_system_env: true,
+  url: [host: "${APP_NAME}.gigalixirapp.com", port: 80],
+
+config :kekbot, Kekbot.Endpoint,
+  server: true,
+  secret_key_base: "${SECRET_KEY_BASE}"
+
+# Do not print debug messages in production
+config :logger, level: :info
 
 config :kekbot, Kekbot.Repo,
   adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("DATABASE_URL"),
+  url: "${DATABASE_URL}",
+  database: "",
   ssl: true,
-  pool_size: 2 # Free tier db only allows 4 connections. Rolling deploys need pool_size*(n+1) connections.
+  pool_size: 1
 
+config :libcluster,
+  topologies: [
+    k8s_example: [
+      strategy: Cluster.Strategy.Kubernetes,
+      config: [
+        kubernetes_selector: "${LIBCLUSTER_KUBERNETES_SELECTOR}",
+        kubernetes_node_basename: "${LIBCLUSTER_KUBERNETES_NODE_BASENAME}"]]]
