@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require 'net/http'
+
+Net::HTTP.get('https://kekbot015.herokuapp.com/', '/')
+
+puts "done."
