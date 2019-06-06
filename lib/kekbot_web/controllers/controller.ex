@@ -2,7 +2,7 @@ defmodule KekbotWeb.Controller do
   use KekbotWeb, :controller
   import Kekbot.Bot
 
-  def hello(conn, _), do: json(conn, %{"message" => "hello1"})
+  def hello(conn, _), do: json(conn, %{"message" => "hello"})
 
   def handle(conn, %{"message" => %{"sticker" => sticker}} = params) do
     IO.puts "handling sticker"
