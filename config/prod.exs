@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :kekbot, KekbotWeb.Endpoint,
-  url: [scheme: "https", host: "kekbot015", port: 443],
+  url: [scheme: "https", host: "kekbot015.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
